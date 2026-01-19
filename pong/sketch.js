@@ -18,6 +18,22 @@ function draw() {
   paddle.display();
   ball.update();
   ball.display();
+  //console.log(`Ball Y pos: ${ball.y}`);
+  //console.log(`Ball R pos: ${ball.radius}`);
+  //console.log(`Paddle Y pos: ${paddle.y}`);
+  var ballBottom = ball.y + ball.radius;
+  var ballTop = ball.y - ball.radius;
+  var ballRightEdge = ball.x + ball.radius;
+  var ballLeftEdge = ball.x - ball.radius;
+  var paddleTopEdge = paddle.y;
+  var paddleBottomEdge = paddle.y + paddle.h;
+  var paddleLeftEdge = paddle.x;
+  var isVerticalCollision = ((ballBottom) >= (paddleTopEdge)) && ((ballTop) <= (paddleBottomEdge));
+  var isHorizontalCollision = ((ballRightEdge) >= (paddleLeftEdge)) && ((ballLeftEdge) <= (paddle.x + paddle.w));
+  if (isVerticalCollision && isHorizontalCollision && ball.yspeed > 0) {
+    ball.y = paddle.y - ball.radius;
+    ball.yspeed = -ball.yspeed;
+  }
 }
 
 class Ball {
