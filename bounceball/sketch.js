@@ -2,10 +2,9 @@ let balls = [];
 
 function setup() {
   createCanvas(800, 600);
-
-  balls.push(new Ball(400, 300));
-  balls.push(new Ball(300, 100));
-  balls.push(new Ball(600, 500));
+  for (let i = 0; i <= 10; i+=1) {
+    balls.push(new Ball(random(1, 800), random(1, 800)));
+  }
 }
 
 function draw() {
