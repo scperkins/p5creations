@@ -5,6 +5,7 @@ let yspeed = 2;
 let r = 20;
 
 let paddle;
+let score = 0;
 
 function setup() {
   createCanvas(800, 600);
@@ -14,13 +15,12 @@ function setup() {
 
 function draw() {
   background(0);
+  text(`Score: ${score}`, 50, 50);
   paddle.update();
   paddle.display();
   ball.update();
   ball.display();
-  //console.log(`Ball Y pos: ${ball.y}`);
-  //console.log(`Ball R pos: ${ball.radius}`);
-  //console.log(`Paddle Y pos: ${paddle.y}`);
+
   var ballBottom = ball.y + ball.radius;
   var ballTop = ball.y - ball.radius;
   var ballRightEdge = ball.x + ball.radius;
@@ -32,6 +32,12 @@ function draw() {
   var isHorizontalCollision = ((ballRightEdge) >= (paddleLeftEdge)) && ((ballLeftEdge) <= (paddle.x + paddle.w));
   if (isVerticalCollision && isHorizontalCollision && ball.yspeed > 0) {
     ball.y = paddle.y - ball.radius;
+    ball.yspeed = -ball.yspeed;
+    score += 1;
+  }
+  // detect bottom of canvas hit
+  if (ballBottom >= 600 && ball.yspeed > 0) {
+    score -= 1;
     ball.yspeed = -ball.yspeed;
   }
 }
