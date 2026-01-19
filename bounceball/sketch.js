@@ -1,27 +1,46 @@
-var x = 400;
-var y = 300;
-var flipSwitch = false;
+let balls = [];
 
 function setup() {
   createCanvas(800, 600);
+
+  balls.push(new Ball(400, 300));
+  balls.push(new Ball(300, 100));
+  balls.push(new Ball(600, 500));
 }
 
 function draw() {
   background(220);
-  circle(x, y, 80);
-  fill(25, 200, 90);
-  console.log(y);
-  console.log(flipSwitch);
-  if ( y <= 299 ) {
-    flipSwitch = false;
+
+  for (let ball of balls) {
+    ball.update();
+    ball.display();
   }
-  if ( y >= 601) {
-    flipSwitch = true;
+}
+
+class Ball {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.radius = 40;
+    this.speed = 5;
+    this.direction = 1; // 1 = down, -1 = up
+    this.ballColor = color(random(255), random(255), random(255));
   }
-  if (y < 601 & !flipSwitch) {
-    y+=3;
+
+  update() {
+    this.y += this.speed * this.direction;
+
+    // Bounce off top and bottom
+    if (this.y > height - this.radius) {
+      this.direction = -1;
+    }
+    if (this.y < this.radius) {
+      this.direction = 1;
+    }
   }
-  if (flipSwitch && y > 299) {
-    y-=3;
+
+  display() {
+    fill(this.ballColor);
+    circle(this.x, this.y, this.radius * 2);
   }
 }
