@@ -11,10 +11,14 @@ function drawBall(color, x, y) {
 
 function draw() {
   background(220);
+  // coords
   let x = random(700);
   let y = random(500);
-  
-  this.drawBall(color(255, 192, 203), x, y);
-  
-  
+  // colors
+  let r = random(255);
+  let g = random(255);
+  let b = random(255);
+  for (let i = 0; i <=10; i +=1) {
+    this.drawBall(color(r, g, b), x, y);
+  }
 }
