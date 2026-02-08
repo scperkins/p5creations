@@ -7,13 +7,14 @@ let current;  // current displacement
 let previous; // previous frame displacement
 let nextGrid; // next state (so we don't overwrite while reading)
 let damping = 0.96;  // lower = ripples die down faster
-let waveSpeed = 0.5;
+let waveSpeed = 0.4;
 let brushRadius = 25;
 let brushStrength = -12;  // negative = depress water (parting)
 let trailStrength = 8;    // ripple strength in drag direction
 
 function setup() {
-  createCanvas(800, 600);
+  createCanvas(600, 600);
+  //colorMode(HSB, 360, 100, 100);
   cols = ceil(width / resolution) + 2;
   rows = ceil(height / resolution) + 2;
   current = initGrid(cols, rows);
@@ -86,7 +87,7 @@ function draw() {
   // Draw water (single TRIANGLE_STRIP for speed)
   background(15, 25, 45);
   noStroke();
-  fill(30, 80, 140, 220);
+  fill(251,72,196, 220);
   beginShape(TRIANGLE_STRIP);
   for (let j = 0; j < rows - 1; j++) {
     for (let i = 0; i < cols; i++) {
